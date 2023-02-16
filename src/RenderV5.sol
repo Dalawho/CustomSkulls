@@ -8,8 +8,6 @@ import { Base64 } from "solady/utils/Base64.sol";
 import 'ethier/utils/DynamicBuffer.sol';
 import {SharedStructs as SSt} from "./sharedStructs.sol";
 import "./interfaces/IIndelible.sol";
-import {IGenericRender} from "./interfaces/IGenericRender.sol";
-// import "forge-std/console.sol";
 
 interface IMash {
     function getCollection(uint256 _collectionNr) external view returns(SSt.CollectionInfo memory);
