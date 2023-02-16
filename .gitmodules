@@ -17,3 +17,7 @@
 	path = lib/ethier
 	url = https://github.com/divergencetech/ethier
 	branch = v0.52.0
+[submodule "lib/solady"]
+	path = lib/solady
+	url = https://github.com/Vectorized/solady
+	branch = v0.0.78
