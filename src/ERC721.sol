@@ -45,8 +45,7 @@ abstract contract ERC721 is SharedStructs, Initializable {
 
         return _balanceOf[owner];
     }
-
-    uint256 public constant MAX_LAYERS = 7;
+    
     uint256 public tokenIndex; // The running index for the next TokenId
     uint256 public startTokenId; // Bytes Storage for the starting TokenId // removed immuntable
 
@@ -212,7 +211,7 @@ abstract contract ERC721 is SharedStructs, Initializable {
         emit Transfer(owner, address(0), id);
     }
 
-    function _mintAndSet(address to, bytes6[MAX_LAYERS] calldata layerInfos)
+    function _mintAndSet(address to, uint8 background, uint8 skull, uint8 under, uint8 eyes, uint8 over, uint8 special)
         internal
         virtual
     {
@@ -225,7 +224,7 @@ abstract contract ERC721 is SharedStructs, Initializable {
         require(_ownerOf[id].owner == address(0), "ALREADY_MINTED");
 
         //this is not great because of all the storage write, I guess to avoid this need to change the way layers
-        _ownerOf[id] = OwnerStruct(to, layerInfos[0], layerInfos[1], [layerInfos[2], layerInfos[3], layerInfos[4], layerInfos[5], layerInfos[6]]);
+        _ownerOf[id] = OwnerStruct(to, background, skull, under, eyes, over, special);
 
         // process the balance changes and do a loop to phantom-mint the tokens to to_
         unchecked {

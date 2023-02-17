@@ -6,7 +6,7 @@ libs = ['lib']
 #optimizer_runs = 1_000
 #eth_rpc_url =
 etherscan_api_key = "${ETHERSCAN_API_KEY}"
-fs_permissions = [{ access = "read-write", path = "./"}]
+fs_permissions = [{ access = "read", path = "./"}]
 
 [rpc_endpoints]
 goerli = "${GOERLI_RPC_URL}"

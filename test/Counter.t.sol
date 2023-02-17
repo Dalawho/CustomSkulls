@@ -2,23 +2,29 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "../src/Counter.sol";
+import "../src/RenderV5.sol";
+import "../src/CustomSkull.sol";
+import "../src/Proxy.sol";
 
 contract CounterTest is Test {
-    Counter public counter;
+    CustomSkull cs;
+    SkullsRender render;
+    CustomSkull wcs;
+    UUPSProxy proxy;
 
     function setUp() public {
-        counter = new Counter();
-        counter.setNumber(0);
+        cs = new CustomSkull();
+        render = new SkullsRender();
+
+        proxy = new UUPSProxy(address(cs), "");
+        wcs = CustomSkull(address(proxy));
+        wcs.initialize();
+        wcs.setRender(address(render));
+        wcs.setMintActive();
     }
 
-    function testIncrement() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
-    }
-
-    function testSetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
+    function testMintAndRender() public {
+        wcs.mint(0,6,2,4,10,2);
+        console.log(wcs.tokenURI(1));
     }
 }
